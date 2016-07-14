@@ -14,34 +14,42 @@ function rtti.class(class_name, super)
 		print(class_name .. ' (' .. type(super) .. ') cant inherit from non-table type')
 	end
 
+	local vtbl = {}				
+	vtbl.__class_name = class_name
+	vtbl.super = super
+
 	local class_type = {}
 	class_type.ctor = false
 	class_type.new = function (...)
 						local instance = {}
-						setmetatable(instance, {__index = _class[class_name]})
+						setmetatable(instance, {__index = vtbl, 
+												__gc = function(instance)
+														if instance.dtor then
+															instance:dtor()
+														end
+													end 
+											})
 
 						do 
-							local create
-							create = function(c, ...)
+							local ctor
+							ctor = function(c, ...)
 										if c.super then
-											create(c.super, ...)
+											ctor(c.super, ...)
 										end
 
 										if c.ctor then
 											c.ctor(instance, ...)
 										end
-									end											
+									end			
+
+							ctor(class_type, ...)																	
 						end
 
 						return instance
 					end
 
 
-	local vtbl = {}				
-	vtbl.__class_name = class_name
-	vtbl.super = super
-
-	_class[class_name] = vtbl
+	_class[class_name] = class_type
 
 	local class_type_mt = {__index = vtbl, 
 							__newindex = function(t, k, v)
@@ -50,6 +58,7 @@ function rtti.class(class_name, super)
 						}
 
 	setmetatable(class_type, class_type_mt)
+
 
 	if super then
 		local super_mt = {__index = function (t, k)
@@ -69,6 +78,18 @@ end
 
 function rtti.get_class(class_name)
 	return _class[class_name]
+end
+
+function rtti.get_function(class_name, func_name)
+	local class_type = _class[class_name]
+	if class_type then
+		local fn = class_type[func_name]
+		if fn then
+			return fn
+		end
+	end
+
+	return nil
 end
 
 function rtti.is_kind(object, class_name)
