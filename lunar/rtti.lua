@@ -1,3 +1,15 @@
+-------------------------------------------------------------------------------
+-- lua rtti impl
+--
+-- @author Blue Yang (swordday2008@gmail.com)
+--
+-- Created by Blue Yang on 7/12/2016.
+--
+-- @copyright 2015-2016 Blue Yang. All rights reserved.
+--
+-------------------------------------------------------------------------------
+
+
 local rtti = rtti or {}
 
 
