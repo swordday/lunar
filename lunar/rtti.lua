@@ -17,7 +17,7 @@ local _class = _class or {}
 
 function rtti.class(class_name, super)
 	if _class[class_name] then
-		print(class_name .. 'exist in _class table, please redefine the class name')
+		print(class_name .. ' already exist in _class table, please redefine the class name')
 		return 
 	end	
 
