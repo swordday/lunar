@@ -1,4 +1,5 @@
 -------------------------------------------------------------------------------
+--
 -- lua rtti impl
 --
 -- @author Blue Yang (swordday2008@gmail.com)
@@ -95,10 +96,7 @@ end
 function rtti.get_function(class_name, func_name)
 	local class_type = _class[class_name]
 	if class_type then
-		local fn = class_type[func_name]
-		if fn then
-			return fn
-		end
+		return class_type[func_name]
 	end
 
 	return nil
