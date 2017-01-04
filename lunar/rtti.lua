@@ -104,7 +104,7 @@ end
 
 function rtti.is_kind(object, class_name)
 	while object do
-		if object.__class_name == class_name and
+		if object.__class_name == class_name then
 			return true
 		end
 
