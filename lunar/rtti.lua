@@ -14,17 +14,18 @@
 local rtti = rtti or {}
 
 
-local _class = _class or {}
+local _classifier = _classifier or {}
 
 function rtti.class(class_name, super)
-	if _class[class_name] then
-		print(class_name .. ' already exist in _class table, please redefine the class name')
+	if _classifier[class_name] then
+
+		print("LUNAR ERROR: " .. class_name .. 'already exist in _classifier table, please redefine the class name')
 		return 
 	end	
 
 	if super and type(super) ~= 'table' then
 		super = nil
-		print(class_name .. ' (' .. type(super) .. ') cant inherit from non-table type')
+		print("LUNAR ERROR: " .. class_name .. ' (' .. type(super) .. ') cant inherit from non-table type')
 	end
 
 	local vtbl = {}				
@@ -62,7 +63,7 @@ function rtti.class(class_name, super)
 					end
 
 
-	_class[class_name] = class_type
+	_classifier[class_name] = class_type
 
 	local class_type_mt = {__index = vtbl, 
 							__newindex = function(t, k, v)
@@ -75,7 +76,7 @@ function rtti.class(class_name, super)
 
 	if super then
 		local super_mt = {__index = function (t, k)
- 										local super_class = _class[super]
+ 										local super_class = _classifier[super]
  										local ret = super_class[k]
  										vtbl[k] = ret
  										return ret 
@@ -90,11 +91,11 @@ function rtti.class(class_name, super)
 end
 
 function rtti.get_class(class_name)
-	return _class[class_name]
+	return _classifier[class_name]
 end
 
 function rtti.get_function(class_name, func_name)
-	local class_type = _class[class_name]
+	local class_type = _classifier[class_name]
 	if class_type then
 		return class_type[func_name]
 	end
