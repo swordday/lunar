@@ -97,7 +97,10 @@ end
 function rtti.get_function(class_name, func_name)
 	local class_type = _classifier[class_name]
 	if class_type then
-		return class_type[func_name]
+		local fn = class_type[func_name]
+		if type(fn) == "function" then
+			return fn
+		end
 	end
 
 	return nil
