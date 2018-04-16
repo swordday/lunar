@@ -18,7 +18,6 @@ local _classifier = _classifier or {}
 
 function rtti.class(class_name, super)
 	if _classifier[class_name] then
-
 		print("LUNAR ERROR: " .. class_name .. 'already exist in _classifier table, please redefine the class name')
 		return 
 	end	
