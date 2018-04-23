@@ -58,6 +58,8 @@ function rtti.class(class_name, super)
 							ctor(class_type, ...)																	
 						end
 
+						instance.__pdatas = {}
+
 						return instance
 					end
 
@@ -65,7 +67,7 @@ function rtti.class(class_name, super)
 	_classifier[class_name] = class_type
 
 	local class_type_mt = {__index = vtbl, 
-							__newindex = function(t, k, v)
+						   __newindex = function(t, k, v)
 											vtbl[k] = v
 										end 
 						}
