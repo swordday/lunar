@@ -32,7 +32,7 @@ lua framework and utils
 
 ### 类静态变量名
 首字符s开头, _后首字符大写, 驼峰法
-> s_TypeName
+> s_Instance
 
 ### 函数
 #### 普通函数
@@ -41,6 +41,11 @@ lua framework and utils
 >* get_name()
 
 上述的规范都可以
+
+#### getter/setter函数
+> 私有成员变量m_x \
+> getter函数为 get_x() \
+> setter函数为 set_x() 
 
 #### 私有函数
 > 以 __ 开头（2个下划线），其他和普通函数一样 \
