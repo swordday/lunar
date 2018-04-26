@@ -1,7 +1,3 @@
-local table_insert = table.insert
-local table_remove = table.remove
-
-
 local class = require("rtti").class
 
 local array = class("array")
@@ -18,14 +14,14 @@ function array:Add(index, value)
     local this = self.__pdatas
 
     this.m_buffer[index] = value
-    table_insert(this.m_buffer, index, value)
+    table.insert(this.m_buffer, index, value)
     this.m_size = this.m_size + 1
 end
 
 function array:Remove(index)
     local this = self.__pdatas
 
-    table_remove(this.m_buffer, index)
+    table.remove(this.m_buffer, index)
     this.m_size = this.m_size - 1
 end
 
