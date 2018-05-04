@@ -7,7 +7,7 @@ function deque:ctor()
 	local this = self.__pdatas
 
 	this.m_first = 0
-	this.m_last = 0
+	this.m_last = -1
 end
 
 function deque:AddFirst(elem)
@@ -69,3 +69,6 @@ function deque:Size()
 	return (this.m_last - this.m_first + 1)
 end
 
+
+
+return deque

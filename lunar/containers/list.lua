@@ -116,3 +116,7 @@ function list:Remove(node)
 
 	this.m_size = this.m_size - 1
 end
+
+
+
+return list
